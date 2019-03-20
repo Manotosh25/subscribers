@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script>
+function getname()
+{
+	document.getElementById('showname').innerHTML=document.getElementById('Name').value;
+}
+function getnumber()
+{
+	document.getElementById('showphone').innerHTML=document.getElementById('Number').value;
+}
+function add()
+{
+	if(document.getElementById('Number').value!="" && document.getElementById('Name').value!="")
+		{
+		  var table = document.getElementById("list");
+		  var row = table.insertRow(-1);
+		  var cell1 = row.insertCell(0);
+		  var cell2 = row.insertCell(1);
+		  var cell3 = row.insertCell(2);
+		  cell1.innerHTML = document.getElementById('Name').value;
+		  cell2.innerHTML = document.getElementById('Number').value;
+		  cell3.innerHTML = "<button onclick=remove(this) id='delete'>Delete</button>";
+		  document.getElementById('Number').value="";
+		  document.getElementById('Name').value="";
+		  document.getElementById('showphone').innerHTML="";
+		  document.getElementById('showname').innerHTML="";
+		  toggle2();
+		}
+}
+function remove(e)
+{
+	var i = e.parentNode.parentNode.rowIndex;
+    document.getElementById("list").deleteRow(i);
+}
+function toggle()
+{
+	document.getElementById("mainadd").style.display="block";
+	document.getElementById("back").style.display="block";
+	document.getElementById("form").style.display="block";
+	document.getElementById("subadd").style.display="none";
+	document.getElementById("list").style.display="none";
+	document.getElementById("Header1").style.display="none";
+	document.getElementById("Header2").style.display="block";
+}
+function toggle2()
+{
+	document.getElementById("mainadd").style.display="none";
+	document.getElementById("back").style.display="none";
+	document.getElementById("form").style.display="none";
+	document.getElementById("subadd").style.display="block";
+	document.getElementById("list").style.display="block";
+	document.getElementById("Header1").style.display="block";
+	document.getElementById("Header2").style.display="none";
+}
+</script>
+<style>
+#Header1,#Header2{
+  width: 100%;
+  background-color: black;
+  color: #FFFFFF;
+  font-size: 34px;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#subadd,#mainadd,#back{
+	background-color:  #00cc00;
+	color: #FFFFFF;
+	font-size: 14px;
+	height: 40px;
+	width: 70px;
+}
+#delete{
+	background-color:  #ff6666;
+	font-size: 14px;
+	height: 40px;
+	width: 70px;
+}
+table td{
+ 	width:1000px;
+}
+label{
+	color: #4da6ff;
+	font-weight: bold;
+}
+#heading{
+	color: #999999;
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div id="container">
+<div id="Header1">PHONE DIRECTORY</div>
+<div id="Header2" style="display:none">ADD SUSCRIBERS</div>
+<button style="display:none" id="back" onclick=toggle2()>Back</button><br>
+<div id="form" style="display:none">
+<span id="heading">Name:</span><br>
+<input type="text" id="Name" onkeyup=getname()><br>
+<span id="heading">Phone:</span><br>
+<input type="number" id="Number" onkeyup=getnumber()><br><br>
+<label>Subscriber to be added:</label><br>
+Name:<span id="showname"></span><br>
+Phone:<span id="showphone"></span><br>
+</div>
+<button id="subadd" onclick=toggle()>ADD</button>
+<button id="mainadd" style="display:none" onclick=add()>ADD</button>
+<table id="list">
+<tr><td><span id="heading">Name</span></td><td><span id="heading">Phone</span></td></tr>
+</table>
+</div>
+</body>
+</html>
